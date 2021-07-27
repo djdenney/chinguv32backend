@@ -1,6 +1,6 @@
 exports.up = function (knex) {
     return knex.schema.createTable("users-resources", (table) => {
-        table.increments("id").primary().unique().nonNullable();
+        table.increments("id").primary();
         table.integer("user");
         table
             .foreign("user")

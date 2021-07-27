@@ -1,6 +1,6 @@
 exports.up = function (knex) {
     return knex.schema.createTable("messages", (table) => {
-        table.increments("id").unique().nonNullable();
+        table.increments("id").primary();
         table.text("text");
         table.integer("sender");
         table
@@ -8,7 +8,7 @@ exports.up = function (knex) {
             .references("id")
             .inTable("users")
             .onDelete("cascade");
-        table.ingeger("recipient");
+        table.integer("recipient");
         table
             .foreign("recipient")
             .references("id")

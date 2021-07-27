@@ -1,7 +1,7 @@
 exports.up = function (knex) {
     return knex.schema.createTable("invites", (table) => {
-        table.increments("id").primary().unique().nonNullable();
-        table.string("email").unique().nonNullable();
+        table.increments("id").primary();
+        table.string("email");
         table.text("message");
         table.integer("sender");
         table
