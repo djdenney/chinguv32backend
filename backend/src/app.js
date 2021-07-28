@@ -4,15 +4,6 @@ require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
 
 const express = require("express");
 const cors = require("cors");
-const { auth } = require("express-openid-connect")
-const authConfig = {
-    authRequired: false,
-    auth0Logout: true,
-    baseURL: process.env.BASE_URL,
-    clientID: process.env.AUTH0_CLIENT_ID,
-    issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
-    secret: process.env.SESSION_SECRET,
-}
 
 const errorHandler = require("./errors/errorHandler");
 const notFound = require("./errors/notFound");
@@ -34,10 +25,6 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(auth(authConfig));
-app.get("/", (req, res, next) => {
-    res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out")
-})
 
 app.options("*", cors());
 app.use("/users", usersRouter)
